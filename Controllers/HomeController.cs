@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using EtecShop.Models;
 using EtecShop.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace EtecShop.Controllers;
 
@@ -18,10 +20,34 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        return View();
+        var products = _context.Products
+            .Include(p => p.Brand)
+            .Include(p => p.Category)
+            .ToList();
+        return View(products);
     }
 
     public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    public IActionResult About()
+    {
+        return View();
+    }
+
+    public IActionResult Products()
+    {
+        return View();
+    }
+
+    public IActionResult Contact()
+    {
+        return View();
+    }
+
+    public IActionResult Login()
     {
         return View();
     }
